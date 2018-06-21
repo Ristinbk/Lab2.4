@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4CDC8812-E7D8-40AD-BDB7-7717DC374767}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Lab2.V4_4</RootNamespace>
-    <AssemblyName>Lab2.V4-4</AssemblyName>
+    <RootNamespace>Lab2</RootNamespace>
+    <AssemblyName>Lab2</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -42,8 +44,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Group\Specialty.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="Session\ISession.cs" />
+    <Compile Include="Session\Session.cs" />
+    <Compile Include="Session\SessionType.cs" />
+    <Compile Include="Session\SubjectType.cs" />
+    <Compile Include="Default.cs" />
+    <Compile Include="Person\FullName.cs" />
+    <Compile Include="Group\NumberGroup.cs" />
+    <Compile Include="Person\Title.cs" />
+    <Compile Include="Session\Assessment.cs" />
+    <Compile Include="Person\Gender.cs" />
+    <Compile Include="Session\ISubject.cs" />
+    <Compile Include="Group\IGroup.cs" />
+    <Compile Include="Person\IPerson.cs" />
+    <Compile Include="Person\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Person\Student.cs" />
+    <Compile Include="Group\Group.cs" />
+    <Compile Include="Session\Subject.cs" />
+    <Compile Include="Person\Teacher.cs" />
+    <Compile Include="Univercity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
