@@ -1,53 +1,83 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Lab2
 {
-    public class Session :ISession
+    public class Session : ISession
     {
-        public List<IGroup> Groups { get; }
-        public List<ISubject> Subjects { get; }
+        public List<IGroup> Groups { get; set; }
+        public List<ISubject> Subjects { get; set; }
         public SessionType SessionType { get; }
+        public int Year { get; }
 
-        public  Session(SessionType sessionType, List<IGroup> groups)
+        public Session(SessionType sessionType, int year)
         {
             SessionType = sessionType;
-            Groups = groups;
+            Groups = new List<IGroup>();
             Subjects = new List<ISubject>();
+            Year = year;
         }
 
-        public void AddSubjects(IGroup Group, List<ISubject> subjects)
+        public void AddSubjects(IGroup group, List<ISubject> subjects)
         {
-            Group.Persons.ForEach(delegate (IPerson student)
+            if (group == null)
+                throw new ArgumentNullException(nameof(group));
+            if (subjects == null)
+                throw new ArgumentNullException(nameof(subjects));
+            Subjects.AddRange(subjects);
+            //    Subjects = subjects ?? throw new ArgumentNullException(nameof(subjects));
+            group.Persons.ForEach(delegate (IPerson student)
             {
-                student.AddSubjects(subjects);
-                //foreach (var s in subjects)
-                //{
-                //    student.AddSubject(s);
-                //}
+                foreach (var t in subjects)
+                {
+                    student.AddSubject(t);
+                }
             });
-            //foreach (var t in Group.Persons)
-            //{
-            //    t.AddSubjects(subjects);
-            //}
         }
 
-        public void moveAssessment(IPerson person, ISubject subject, Assessment assessment)
+        public void MoveToGroupSession(IGroup group, ISession session)
         {
-         //   foreach (var t in Groups)
-         //   {
-            //    t.Persons.Find(e => e == person);
-                person.Subjects.Find(e => e.NameSubject == subject.NameSubject).AddAssessment(assessment); 
-        //    }
+            Groups.Add(group);
+            AddSubjects(group, session.Subjects);
         }
 
-        public void ShowSession(List<ISession> session)
+        public void MoveToSubjectAssessment(IPerson person, ISubject subject, Assessment assessment)
         {
-            foreach (ISession f in session)
+            if (person == null)
+                throw new ArgumentNullException(nameof(person));
+            if (subject == null)
+                throw new ArgumentNullException(nameof(subject));
+            person.Subjects.Find(e => e.NameSubject == subject.NameSubject).AddAssessment(assessment);
+        }
+
+        public void ShowSession()
+        {
+            Console.WriteLine(ToString());
+            foreach (var t in Subjects)
             {
-                f.ToString();
+                Console.WriteLine(t.ToString());
             }
         }
 
-        public override string ToString() => $"{SessionType} session";
+        public void ShowResultToGroup(IGroup group, ISubject subject)
+        {
+            if (group == null)
+                throw new ArgumentNullException(nameof(group));
+            if (subject == null)
+                throw new ArgumentNullException(nameof(subject));
+            Console.WriteLine(ToString());
+            Console.WriteLine(subject.NameSubject + " " + subject.SubjectType + " " + group.NumberGroup);
+            group.Persons.ForEach(delegate (IPerson person)
+            {
+                person.ShowSubject(subject);
+            });
+        }
+
+        public void ShowResultToPerson(IPerson person, ISubject subject)
+        {
+            person.ShowAllSubjects();
+        }
+
+        public override string ToString() => $"{SessionType} session {Year}";
     }
 }

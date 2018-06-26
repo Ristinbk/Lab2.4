@@ -7,6 +7,6 @@
         Credited,
         Tree,
         Four,
-        Five       
+        Five
     }
 }

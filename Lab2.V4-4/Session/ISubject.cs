@@ -4,7 +4,7 @@ namespace Lab2
 {
     public interface ISubject
     {
-        IPerson Teacher { get; set; }
+        string NameTeacher { get; set; }
         SubjectType SubjectType { get; set; }
         Assessment Assessment { get; }
         string NameSubject { get; set; }
@@ -12,7 +12,5 @@ namespace Lab2
         void AddTeacher(IPerson teacher);
         ISubject GetSubject(ISubject subject);
         void AddAssessment(Assessment assessment);
-        void ShowSubject();
-        void ShowAllSubjects(List<ISubject> subjects);  
     }
 }

@@ -4,10 +4,13 @@ namespace Lab2
 {
     public interface ISession
     {
+        SessionType SessionType { get; }
+        int Year { get; }
         List<ISubject> Subjects { get; }
 
         void AddSubjects(IGroup Group, List<ISubject> subjects);
-        void moveAssessment(IPerson person, ISubject subject, Assessment assessment);
-        void ShowSession(List<ISession> session);
+        void MoveToSubjectAssessment(IPerson person, ISubject subject, Assessment assessment);
+        void ShowSession();
+        void ShowResultToGroup(IGroup group, ISubject subject);
     }
 }

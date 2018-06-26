@@ -6,7 +6,8 @@
         {
             Univercity U = new Univercity("test");
             Default.DefaultUnivercity(U);
-            Menu.ShowMenu(U);
+            Demo.ShowMenu(U);
+            
 
             //         var orgDto = Mapper.GetOrganizationDto(U);
             //       Serializer.ToXml(orgDto, @"file");

@@ -4,16 +4,28 @@ namespace Lab2
 {
     public class Student : Person
     {
-        public override string Id { get; set; }
-        public IGroup Group { get; private set; }        
+        public string NumberGroup { get; }        
 
-        public Student(FullName name, DateTime birthDate, Gender gender)
-           : base(name, birthDate, gender) { }
+        public Student(FullName name, DateTime birthDate, Gender gender, Id id)
+           : base(name, birthDate, gender)
+        {
+            Id = id;
+            NumberGroup = id.ToString().Substring(0, 5);
+        }
 
-        public void AddTo(IGroup Group) => this.Group = Group ?? throw new ArgumentNullException();
-        public void AddAssessment(ISubject subject, Assessment assessment) => subjects.Find(e => e == subject).AddAssessment(assessment);
-        public override void SetId(int id) => Id = Group.NumberGroup.ToString() + id;
-        public override string ToString() => $"id: {Id} {Name} ({DateOfBirth:d}) {Gender} {Group}";
-        public override void ShowPerson() => Console.WriteLine(Name + "\t" + Gender + "\t" + Group);
+        public void AddAssessment(ISubject subject, Assessment assessment)
+        {
+            if (subject == null)
+                throw new ArgumentNullException(nameof(subject));
+            Subjects.Find(e => e == subject).AddAssessment(assessment);
+        }
+
+        public void MoveToSubjectAssessment(ISubject subject, Assessment assessment)
+        {
+
+        }
+
+        public override string ToString() => $"id: {Id} {Name} ({DateOfBirth:d}) {Gender} {NumberGroup}";
+
     }
 }

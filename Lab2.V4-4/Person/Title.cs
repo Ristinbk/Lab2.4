@@ -1,8 +1,8 @@
 ﻿namespace Lab2
-{ 
+{
     public enum Title
     {
-        Professor,
+        Professor = 1,
         Lecture,
         Aspirant
     }

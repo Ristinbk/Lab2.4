@@ -4,8 +4,7 @@ namespace Lab2
 {
     public enum Specialty
     {
-        Enrollee,
-        InformaticsAndComputerFacilities,
+        InformaticsAndComputerFacilities = 1,
         TechnosphericSafety,
         Management,
         StateAudit,

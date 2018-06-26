@@ -2,7 +2,7 @@
 {
     public enum SubjectType
     {
-        Credited,
+        Credited = 1,
         Exem
     }
 }

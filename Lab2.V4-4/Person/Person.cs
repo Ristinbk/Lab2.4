@@ -8,35 +8,48 @@ namespace Lab2
         public FullName Name { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Gender Gender { get; set; }
-        public abstract string Id { get; set; }
-        protected List<ISubject> subjects;
-        public List<ISubject> Subjects { get { return subjects; } }
+        public Id Id { get; set; }
+        public List<ISubject> Subjects { get; } 
 
         public Person(FullName name, DateTime birthDate, Gender Gender)
         {
             Name = name;
-            Gender = (Gender)Enum.Parse(typeof(Gender), this.Gender.ToString(), true);
-            DateOfBirth = default(DateTime);
-            subjects = new List<ISubject>();
+            this.Gender = Gender;
+            DateOfBirth = birthDate;
+            Subjects = new List<ISubject>();
+            Id = new Id();
         }
 
-        public abstract void SetId(int id);
-        public abstract void ShowPerson();
-        public void AddSubject(ISubject subject) => subjects.Add(new Subject(subject.NameSubject, subject.SubjectType, subject.Teacher));
-
-        public void AddSubjects(List<ISubject> subjects)
+        public void AddSubject(ISubject subject)
         {
-            for (int i = 0; i < subjects.Count; i++)
-            {
-                this.subjects.Add(new Subject(subjects[i].NameSubject, subjects[i].SubjectType, subjects[i].Teacher));
-            }            
+            if (subject == null)
+                throw new ArgumentNullException(nameof(subject));
+            Subjects.Add(new Subject(subject.NameSubject, subject.SubjectType, subject.NameTeacher));
         }
 
-        public void ShowAllPerson(List<IPerson> person)
+        public bool GetPerson(string id)
         {
-            foreach (IPerson f in person)
+            if (id == null)
+                throw new ArgumentNullException(nameof(id));
+            if (!Id.ToString().Equals(id))
+                return false;
+            else
+                return true;
+        }
+
+        public void ShowSubject(ISubject subject)
+        {
+            if (subject == null)
+                throw new ArgumentNullException(nameof(subject));
+            Console.WriteLine(Name + "\t- "  + Subjects.Find(s => s.NameSubject.Equals(subject.NameSubject)).Assessment);
+        }
+
+        public void ShowAllSubjects()
+        {
+            Console.WriteLine(ToString());
+            foreach (var s in Subjects)
             {
-                f.ShowPerson();
+                Console.WriteLine(s.NameSubject + "\t(" + s.SubjectType + ")\t- " + s.Assessment);
             }
         }
     }

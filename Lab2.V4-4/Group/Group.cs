@@ -5,54 +5,49 @@ namespace Lab2
 {
     public class Group : IGroup
     {
-        public Specialty Specialty { get; }
-        public NumberGroup NumberGroup { get; }
+        public NumberGroup NumberGroup { get; set; }
         public List<IPerson> Persons { get; set; }
 
-        public Group(Specialty specialty) : this(specialty, new int()) => NumberGroup = new NumberGroup();
-
-        public Group(Specialty specialty, int number)
+        public Group(NumberGroup numberGroup)
         {
-            Specialty = specialty;
             Persons = new List<IPerson>();
-            NumberGroup = new NumberGroup(specialty, number);
+            NumberGroup = numberGroup;
         }
 
-        public void AddPerson(IPerson student)
+        public void AddPerson(IPerson person)
         {
-            if (student == null)
+            if (person == null)
                 throw new ArgumentNullException();  
-            Persons.Add(student);
+            Persons.Add(person);
         }
 
         public void RemovePerson(string id)
         {
-            if (string.IsNullOrWhiteSpace(id))
-                throw new ArgumentException();
-            var person = GetPerson(id);
-            if (person == null)
-                throw new ArgumentNullException();
-            Persons.Remove(person);
+            if (id == null)
+                throw new ArgumentNullException(nameof(id));
+            Persons.Remove(GetPerson(id));
         }
 
         public IPerson GetPerson(string id)
         {
-            if (string.IsNullOrWhiteSpace(id))
-                throw new ArgumentException();
-            return Persons.Find(e => e.Id == id);
+            if (id == null)
+                throw new ArgumentNullException(nameof(id));
+            return Persons.Find(e => e.Id.ToString().Equals(id));
         }
 
-        public void ShowAllPersonInGroops()
+        public void ShowAllPersonInGroop()
         {
-            Console.WriteLine("Группа: " + Specialty);
-            foreach (var t in Persons)
+            Console.WriteLine("Группа: " + NumberGroup);
+            if (Persons != null)
             {
-                t.ShowPerson();
+                foreach (var t in Persons)
+                {
+                    Console.WriteLine(t.ToString());
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine();
         }
 
-        public void ShowAllGroops() => Console.WriteLine("Группа: " + Specialty);
         public override string ToString() => $"{NumberGroup}";
     }
 }

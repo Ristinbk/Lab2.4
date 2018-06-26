@@ -2,7 +2,7 @@
 {
     public enum SessionType
     {
-        Winter,
+        Winter = 1,
         Summer
     }
 }

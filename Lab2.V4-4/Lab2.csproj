@@ -44,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Person\Id.cs" />
+    <Compile Include="Person\Entrant.cs" />
     <Compile Include="Group\Specialty.cs" />
-    <Compile Include="Menu.cs" />
+    <Compile Include="Demo.cs" />
     <Compile Include="Session\ISession.cs" />
     <Compile Include="Session\Session.cs" />
     <Compile Include="Session\SessionType.cs" />
