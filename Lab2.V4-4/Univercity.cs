@@ -21,7 +21,7 @@ namespace Lab2
             Subjects = new List<ISubject>();
             Teachers = new List<IPerson>();
             Groups = new List<IGroup>();
-            Sessions = new List<ISession>();
+            Sessions = new List<ISession>();  
         }
 
         public void AddEntrant(IPerson entrant)
@@ -36,9 +36,7 @@ namespace Lab2
             if (subject == null)
                 throw new ArgumentNullException();
             if (!Subjects.Contains(subject))
-            {
                 Subjects.Add(subject);
-            }
         }
 
         public void AddTeacher(IPerson teacher)
@@ -52,27 +50,16 @@ namespace Lab2
         {
             if (group == null)
                 throw new ArgumentNullException();
-            GetGroup(group.NumberGroup.ToString());
-            Groups.Add(group);
-            //if ()
-            //{
-
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Группа уже существует, создать вторую?");
-            //    //    var s =  Console.ReadLine();
-            //    group.NumberGroup =  new NumberGroup(group.NumberGroup);
-            //        Groups.Add(group);
-            //}
-
+            if (!Groups.Contains(group))
+                Groups.Add(group);
         }
 
         public void AddSession(ISession session)
         {
             if (session == null)
                 throw new ArgumentNullException();
-            Sessions.Add(session);
+            if (!Sessions.Contains(session))
+                Sessions.Add(session);
         }
 
         public void MoveEntrantInGroup(string numberGroup, string id)
@@ -94,24 +81,24 @@ namespace Lab2
             return Entrants.Find(t => t.Id.ToString().Equals(id));
         }
 
-        public IPerson GetTeacher(string id)
+        private IPerson GetTeacher(string id)
         {
             return Teachers.Find(e => e.Id.ToString().Equals(id));
         }
 
-        public ISubject GetSubject(string nameSubject)
+        private ISubject GetSubject(string nameSubject)
         {
             return Subjects.Find(e => e.NameSubject.Equals(nameSubject));
         }
 
-        public IGroup GetGroup(string numberGroup)
+        private IGroup GetGroup(string numberGroup)
         {
             if (numberGroup == null)
                 throw new ArgumentException();
             return Groups.Find(g => g.NumberGroup.ToString().Equals(numberGroup));
         }
 
-        public ISession GetSession(string session)
+        private ISession GetSession(string session)
         {
             return Sessions.Find(s => s.ToString().Equals(session));
         }
@@ -148,7 +135,7 @@ namespace Lab2
         {
             if (id == null)
                 throw new ArgumentException();
-            Entrants.Remove(Entrants.Find(e => e.Id.ToString().Equals(id)));
+            Entrants.Remove(GetEntrant(id));
         }
 
         public void RemoveTeacher(string id)
@@ -253,35 +240,9 @@ namespace Lab2
             GetSession(session).MoveToSubjectAssessment(GetGroup(numberGroup).GetPerson(id), GetSubject(nameSubject), assessment);
         }
 
-        public void ShowResultSubjectInGroup(string numberGroup, string nameSubject)
+        public void ShowResultSubjectInGroup(string session, string numberGroup, string nameSubject) //
         {
-      //      GetGroup(numberGroup).Persons.Where(s => s.Subjects.Find(e => e.NameSubject.Equals(nameSubject)).ToString());
-        }
-
-        public void ShowResultSessionForPerson(string numberGroup, string id)
-        {
-            GetGroup(numberGroup).GetPerson(id).ShowAllSubjects();
-        }
-
-        public void ShowListOfDebtors()
-        {
-        //    Groups.FindAll(p => p.Persons.Where(s => s.Subjects.Find(n => n.Assessment.Equals(Assessment.None))));
-
-            //var r = from IGroup in Groups
-            //        from IPerson in IGroup.Persons
-            //        from ISubject in IPerson.Subjects
-            //        where ISubject.Assessment.Equals(Assessment.None) && ISubject.Assessment.Equals(Assessment.NoCredited)
-            //        //    where IPerson.Subjects
-            //        select IGroup;
-            ////        r.
-
-            foreach (var t in Groups)
-            {
-                t.Persons.Where(e => e.Subjects.TrueForAll(d =>
-                d.Assessment.Equals(Assessment.None) && d.Assessment.Equals(Assessment.NoCredited))).ToString();
-            }
-
-
+            GetSession(session).ShowResultToGroup(GetGroup(numberGroup), GetSubject(nameSubject));
         }
 
         public override string ToString() => $"\"{Name}\"";

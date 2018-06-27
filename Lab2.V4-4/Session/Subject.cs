@@ -43,7 +43,18 @@ namespace Lab2
         {
             Console.WriteLine($"{NameSubject} {NameTeacher} ({SubjectType}) {Assessment}");
         }
+
         public void AddAssessment(Assessment assessment) => Assessment = assessment;
         public override string ToString() => $"{NameSubject}";
+
+        public bool Equals(ISubject other)
+        {
+            if (other != null && NameSubject.ToString().Equals(other.NameSubject.ToString()))
+                return true;
+            else
+                return false;
+        }
+
+
     }
 }

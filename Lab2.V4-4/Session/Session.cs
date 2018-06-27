@@ -8,14 +8,16 @@ namespace Lab2
         public List<IGroup> Groups { get; set; }
         public List<ISubject> Subjects { get; set; }
         public SessionType SessionType { get; }
+        public string Specialty { get; }
         public int Year { get; }
 
-        public Session(SessionType sessionType, int year)
+        public Session(SessionType sessionType, int year, Specialty specialty)
         {
             SessionType = sessionType;
             Groups = new List<IGroup>();
             Subjects = new List<ISubject>();
             Year = year;
+            Specialty = specialty.ToString().Substring(0,3);
         }
 
         public void AddSubjects(IGroup group, List<ISubject> subjects)
@@ -25,7 +27,6 @@ namespace Lab2
             if (subjects == null)
                 throw new ArgumentNullException(nameof(subjects));
             Subjects.AddRange(subjects);
-            //    Subjects = subjects ?? throw new ArgumentNullException(nameof(subjects));
             group.Persons.ForEach(delegate (IPerson student)
             {
                 foreach (var t in subjects)
@@ -35,10 +36,17 @@ namespace Lab2
             });
         }
 
-        public void MoveToGroupSession(IGroup group, ISession session)
+        public void AddSubjects(IPerson person, List<ISubject> subjects)
         {
-            Groups.Add(group);
-            AddSubjects(group, session.Subjects);
+            if (person == null)
+                throw new ArgumentNullException(nameof(person));
+            if (subjects == null)
+                throw new ArgumentNullException(nameof(subjects));
+            Subjects.AddRange(subjects);
+            foreach (var t in subjects)
+            {
+                person.AddSubject(t);
+            }
         }
 
         public void MoveToSubjectAssessment(IPerson person, ISubject subject, Assessment assessment)
@@ -78,6 +86,14 @@ namespace Lab2
             person.ShowAllSubjects();
         }
 
-        public override string ToString() => $"{SessionType} session {Year}";
+        public bool Equals(ISession other)
+        {
+            if (other != null && ToString().Equals(other.ToString()))
+                return true;
+            else
+                return false;
+        }
+
+        public override string ToString() => $"{SessionType} session {Year} {Specialty}";     
     }
 }

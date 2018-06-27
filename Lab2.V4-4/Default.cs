@@ -72,7 +72,7 @@ namespace Lab2
 
         public static void DefaultSession(Univercity U)
         {
-            U.AddSession(new Session(SessionType.Winter, 2018));
+            U.AddSession(new Session(SessionType.Winter, 2018, Specialty.Service));
             U.Sessions[0].AddSubjects(U.Groups[0], U.Subjects);
             U.Sessions[0].AddSubjects(U.Groups[1], U.Subjects);
             U.Sessions[0].MoveToSubjectAssessment(U.Groups[0].Persons[0], U.Subjects[0], Assessment.Five);

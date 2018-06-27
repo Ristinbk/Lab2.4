@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace Lab2
 {
-    public interface IGroup
+    public interface IGroup : IEquatable<IGroup>
     {
         NumberGroup NumberGroup { get; set; }
         List<IPerson> Persons { get; set; }

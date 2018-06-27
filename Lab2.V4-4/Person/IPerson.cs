@@ -11,7 +11,6 @@ namespace Lab2
         Id Id { get; set; }
         List<ISubject> Subjects { get; }
 
-        bool GetPerson(string id);
         void AddSubject(ISubject subject);
         void ShowSubject(ISubject subject);
         void ShowAllSubjects();

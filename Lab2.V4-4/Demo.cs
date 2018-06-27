@@ -146,7 +146,7 @@ namespace Lab2
                         U.ShowPersonsInGroup(InputNumberGroup());
                         break;
                     case 6:
-
+                       
                         break;
                 }
             } while (s != 0);
@@ -154,9 +154,8 @@ namespace Lab2
 
         private static void ShowMenuSessions(Univercity U)
         {
-            Console.Write("1 - Добавить запись\n2 - Удалить запись\n3 - Заполнить результаты экзамена\n" +
-                "4 - Изменить результат экзамена\n5 - Вывести список сессий\n6 - Вывести результаты экзамена для группы\n" +
-                "7 - Вывести результат сессии студента\n8 - Список должников в группе\n0 - В главное меню");
+            Console.Write("1 - Добавить запись\n2 - Удалить запись\n3 - Изменить результат экзамена\n4 - Вывести список сессий\n" +
+                "5 - Вывести результаты экзамена для группы\n0 - В главное меню");
             int s;
             do
             {
@@ -171,34 +170,13 @@ namespace Lab2
                         U.RemoveSession(InputSession());
                         break;
                     case 3:
-                        
-                        break;
-                    case 4:
                         U.MoveResultPerson(InputSession(), InputNumberGroup(), InputId(), InputNameSubject(), InputAssessment());                        
                         break;
-                    case 5:
+                    case 4:
                         U.ShowSession();
                         break;
-                    case 6:
+                    case 5:
                         U.ShowResultOfSession(InputSession(), InputNumberGroup(), InputNameSubject());
-                        break;
-                    case 7:
-                        U.ShowResultSessionForPerson(InputNumberGroup(), InputId());
-                        break;
-                    case 8:
-                        U.ShowListOfDebtors();
-                        //var r = from IGroup in U.Groups
-                        //        where IGroup.NumberGroup.Equals(InputNumberGroup())
-                        //        from IPerson in IGroup.Persons
-                        //        from ISubject in IPerson.Subjects
-                        //        where ISubject.Assessment.Equals(Assessment.None) && ISubject.Assessment.Equals(Assessment.NoCredited)
-                        //    //    where IPerson.Subjects
-                        //        select IPerson;
-
-
-                        break;
-                    case 9:
-
                         break;
                 }
             } while (s != 0);
@@ -324,7 +302,7 @@ namespace Lab2
 
         private static IGroup InputNewGroup()
         {
-            return new Group(new NumberGroup(InputSpecialty(), DateTime.Now.Year));
+            return new Group(new NumberGroup(InputSpecialty(), 2018));
         }
 
         private static Specialty InputSpecialty()
@@ -343,7 +321,7 @@ namespace Lab2
 
         private static ISession InputNewSession()
         {
-            return new Session(InputSessionType(), DateTime.Now.Year);
+            return new Session(InputSessionType(), DateTime.Now.Year, InputSpecialty());
         }        
 
         private static SessionType InputSessionType()

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Lab2
 {
-    public interface ISubject
+    public interface ISubject : IEquatable<ISubject>
     {
         string NameTeacher { get; set; }
         SubjectType SubjectType { get; set; }

@@ -27,21 +27,11 @@ namespace Lab2
             Subjects.Add(new Subject(subject.NameSubject, subject.SubjectType, subject.NameTeacher));
         }
 
-        public bool GetPerson(string id)
-        {
-            if (id == null)
-                throw new ArgumentNullException(nameof(id));
-            if (!Id.ToString().Equals(id))
-                return false;
-            else
-                return true;
-        }
-
         public void ShowSubject(ISubject subject)
         {
             if (subject == null)
                 throw new ArgumentNullException(nameof(subject));
-            Console.WriteLine(Name + "\t- "  + Subjects.Find(s => s.NameSubject.Equals(subject.NameSubject)).Assessment);
+            Console.WriteLine(Name + "\t- "  + Subjects.Find(s => s.NameSubject.Equals(subject.NameSubject)));
         }
 
         public void ShowAllSubjects()

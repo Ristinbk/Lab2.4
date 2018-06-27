@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lab2
 {
-    public class Group : IGroup
+    public class Group :  IGroup
     {
         public NumberGroup NumberGroup { get; set; }
         public List<IPerson> Persons { get; set; }
@@ -46,6 +47,14 @@ namespace Lab2
                 }
                 Console.WriteLine();
             }
+        }
+
+        public bool Equals(IGroup other)
+        {
+            if (other != null && NumberGroup.ToString().Equals(other.NumberGroup.ToString()))
+                return true;
+            else
+                return false;
         }
 
         public override string ToString() => $"{NumberGroup}";
