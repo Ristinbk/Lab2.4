@@ -5,7 +5,7 @@ namespace Lab2
 
     public class NumberGroup
     {
-        public string CodeSpecialty { get; }
+        public string CodeSpecialty { get; set; }
         public int Number { get; }
 
         public NumberGroup(Specialty specialty, int number)

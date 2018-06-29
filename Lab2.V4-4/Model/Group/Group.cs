@@ -7,46 +7,34 @@ namespace Lab2
     public class Group :  IGroup
     {
         public NumberGroup NumberGroup { get; set; }
-        public List<IPerson> Persons { get; set; }
+        public List<IStudent> Students { get; set; }
 
         public Group(NumberGroup numberGroup)
         {
-            Persons = new List<IPerson>();
+            Students = new List<IStudent>();
             NumberGroup = numberGroup;
         }
 
-        public void AddPerson(IPerson person)
+        public void AddStudent(IStudent student)
         {
-            if (person == null)
+            if (student == null)
                 throw new ArgumentNullException();  
-            Persons.Add(person);
+            Students.Add(student);
+            student.Id = new Id(NumberGroup, student.Id);
         }
 
-        public void RemovePerson(string id)
+        public void RemoveStudent(string id)
         {
             if (id == null)
                 throw new ArgumentNullException(nameof(id));
-            Persons.Remove(GetPerson(id));
+            Students.Remove(GetStudent(id));
         }
 
-        public IPerson GetPerson(string id)
+        public IStudent GetStudent(string id)
         {
             if (id == null)
                 throw new ArgumentNullException(nameof(id));
-            return Persons.Find(e => e.Id.ToString().Equals(id));
-        }
-
-        public void ShowAllPersonInGroop()
-        {
-            Console.WriteLine("Группа: " + NumberGroup);
-            if (Persons != null)
-            {
-                foreach (var t in Persons)
-                {
-                    Console.WriteLine(t.ToString());
-                }
-                Console.WriteLine();
-            }
+            return Students.Find(e => e.Id.ToString().Equals(id));
         }
 
         public bool Equals(IGroup other)

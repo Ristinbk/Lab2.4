@@ -39,6 +39,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,35 +49,78 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Person\Id.cs" />
-    <Compile Include="Person\Entrant.cs" />
-    <Compile Include="Group\Specialty.cs" />
-    <Compile Include="Demo.cs" />
-    <Compile Include="Session\ISession.cs" />
-    <Compile Include="Session\Session.cs" />
-    <Compile Include="Session\SessionType.cs" />
-    <Compile Include="Session\SubjectType.cs" />
-    <Compile Include="Default.cs" />
-    <Compile Include="Person\FullName.cs" />
-    <Compile Include="Group\NumberGroup.cs" />
-    <Compile Include="Person\Title.cs" />
-    <Compile Include="Session\Assessment.cs" />
-    <Compile Include="Person\Gender.cs" />
-    <Compile Include="Session\ISubject.cs" />
-    <Compile Include="Group\IGroup.cs" />
-    <Compile Include="Person\IPerson.cs" />
-    <Compile Include="Person\Person.cs" />
+    <Compile Include="Controllers\NewSessionFormController.cs" />
+    <Compile Include="Controllers\NewStudentFormController.cs" />
+    <Compile Include="Controllers\NewTeacherFormController.cs" />
+    <Compile Include="Controllers\NewGroupFormController.cs" />
+    <Compile Include="Controllers\GroupsFormController.cs" />
+    <Compile Include="Model\Person\Id.cs" />
+    <Compile Include="Model\Group\Specialty.cs" />
+    <Compile Include="Model\Demo.cs" />
+    <Compile Include="Model\Person\IStudent.cs" />
+    <Compile Include="Model\Person\ITeacher.cs" />
+    <Compile Include="Model\Session\ISession.cs" />
+    <Compile Include="Model\Session\Session.cs" />
+    <Compile Include="Model\Session\SessionType.cs" />
+    <Compile Include="Model\Session\SubjectType.cs" />
+    <Compile Include="Model\Person\FullName.cs" />
+    <Compile Include="Model\Group\NumberGroup.cs" />
+    <Compile Include="Model\Person\Title.cs" />
+    <Compile Include="Model\Session\Assessment.cs" />
+    <Compile Include="Model\Session\ISubject.cs" />
+    <Compile Include="Model\Group\IGroup.cs" />
+    <Compile Include="Model\Person\IPerson.cs" />
+    <Compile Include="Model\Person\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Person\Student.cs" />
-    <Compile Include="Group\Group.cs" />
-    <Compile Include="Session\Subject.cs" />
-    <Compile Include="Person\Teacher.cs" />
-    <Compile Include="Univercity.cs" />
+    <Compile Include="Model\Person\Student.cs" />
+    <Compile Include="Model\Group\Group.cs" />
+    <Compile Include="Model\Session\Subject.cs" />
+    <Compile Include="Model\Person\Teacher.cs" />
+    <Compile Include="Model\Univercity.cs" />
+    <Compile Include="View\NewGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\NewGroupForm.Designer.cs">
+      <DependentUpon>NewGroupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\NewStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\NewStudentForm.Designer.cs">
+      <DependentUpon>NewStudentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SessionFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SessionFrom.Designer.cs">
+      <DependentUpon>SessionFrom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\GroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\GroupsForm.Designer.cs">
+      <DependentUpon>GroupsForm.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\NewGroupForm.resx">
+      <DependentUpon>NewGroupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\NewStudentForm.resx">
+      <DependentUpon>NewStudentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SessionFrom.resx">
+      <DependentUpon>SessionFrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\GroupsForm.resx">
+      <DependentUpon>GroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Lab2.Group">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAQEgAAAAAAAAAAAAAAAAAJAQAAAAAA=</HashCode>
+      <FileName>Model\Group\Group.cs</FileName>
+      <NewMemberFileName>Model\Univercity.cs</NewMemberFileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lab2.Person">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAQAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Model\Person\Person.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Id" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lab2.Student">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Person\Student.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lab2.Teacher">
+    <Position X="2.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAEAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Person\Teacher.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Title" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lab2.Id">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Person\Id.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab2.FullName">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAGAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Model\Person\FullName.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab2.Session">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAgBAAAAAAEgCAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Session\Session.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SessionType" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lab2.Subject">
+    <Position X="10.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAACAAAAAAkgAACAAAAAAAAAAAAEAAQAAABAAA=</HashCode>
+      <FileName>Model\Session\Subject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Assessment" />
+      <Property Name="SubjectType" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lab2.NumberGroup">
+    <Position X="13" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAEAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Group\NumberGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lab2.Univercity">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAJAgEAAAAAQAAAkBCAAABQICAEgARAFAAJAQgBAAAA=</HashCode>
+      <FileName>Model\Univercity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Lab2.ISession">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAgBAAAAAAAACAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Session\ISession.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Lab2.ISubject">
+    <Position X="8.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAACAAAAAAgAAACAAAAAAAAAAAAEAAQAAABAAA=</HashCode>
+      <FileName>Model\Session\ISubject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Lab2.IGroup">
+    <Position X="10.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAJAQAAAAAA=</HashCode>
+      <FileName>Model\Group\IGroup.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="NumberGroup" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Lab2.IPerson">
+    <Position X="4.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAQAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Model\Person\IPerson.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Lab2.IStudent">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Person\IStudent.cs</FileName>
+      <NewMemberFileName>Person\IPerson.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Lab2.ITeacher">
+    <Position X="4.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Person\ITeacher.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Lab2.Title">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Model\Person\Title.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Lab2.Assessment">
+    <Position X="13" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACAAAAAAAAAAAAAAAgEAAAAAAAAAAkAAAA=</HashCode>
+      <FileName>Model\Session\Assessment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Lab2.SubjectType">
+    <Position X="13" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Session\SubjectType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Lab2.SessionType">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Session\SessionType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Lab2.Specialty">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAgAAAAAAAAIAAAAQIAAAAAAAEBAAAA=</HashCode>
+      <FileName>Model\Group\Specialty.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

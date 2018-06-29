@@ -11,9 +11,7 @@ namespace Lab2
         int Year { get; }
 
         void AddSubjects(IGroup Group, List<ISubject> subjects);
-        void AddSubjects(IPerson person, List<ISubject> subjects);
-        void MoveToSubjectAssessment(IPerson person, ISubject subject, Assessment assessment);
-        void ShowSession();
-        void ShowResultToGroup(IGroup group, ISubject subject);
+        void AddSubjects(IStudent student, List<ISubject> subjects);
+        void MoveToSubjectAssessment(IStudent student, ISubject subject, Assessment assessment);
     }
 }

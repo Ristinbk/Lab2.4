@@ -1,24 +1,24 @@
-﻿namespace Lab2
+﻿using System;
+using System.Windows.Forms;
+using Lab2;
+using Lab4.Controllers;
+using Lab4.View;
+
+namespace Lab2
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            Univercity U = new Univercity("test");
-            Default.DefaultUnivercity(U);
+            Univercity U = new Univercity("test"); 
+            Demo.InitializeUnivercity(U);
             Demo.ShowMenu(U);
-            
 
-            //         var orgDto = Mapper.GetOrganizationDto(U);
-            //       Serializer.ToXml(orgDto, @"file");
-            //     var dto = Serializer.FromXml<UnivercityF>(@"file");
-            //       var result = new Univercity(dto);
-            //       Reporter.Show(result);
-
-            //Create univercity = new Create();
-            //univercity.Default();
-            //univercity.Menu();
-            // Univercity.CreateUnivercity();
+            GroupsFormController controller = new GroupsFormController(U);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new GroupsForm(controller));
         }       
     }
 }

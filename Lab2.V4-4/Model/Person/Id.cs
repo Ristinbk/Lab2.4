@@ -19,10 +19,15 @@ namespace Lab2
                     .Concat(Enumerable.Range(97, 26).Select(e => e.ToString()))
                     .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
                     .OrderBy(e => Guid.NewGuid())
-                    .Take(2)
+                    .Take(3)
                     .ToList().ForEach(e => builder.Append(e));
             Number = builder.ToString();
         }   
+
+        public Id(Id id)
+        {
+            Number = id.ToString();
+        }
 
         public Id(NumberGroup numberGroup, Id id)
         {

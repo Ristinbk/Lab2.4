@@ -25,7 +25,7 @@ namespace Lab2
             NameTeacher = nameTeacher;
         }
 
-        public void AddTeacher(IPerson teacher)
+        public void AddTeacher(ITeacher teacher)
         {
             if (teacher == null)
                 throw new ArgumentNullException(nameof(teacher));
@@ -39,12 +39,9 @@ namespace Lab2
             return subject;
         }
 
-        public void ShowSubject()
-        {
-            Console.WriteLine($"{NameSubject} {NameTeacher} ({SubjectType}) {Assessment}");
-        }
 
         public void AddAssessment(Assessment assessment) => Assessment = assessment;
+
         public override string ToString() => $"{NameSubject}";
 
         public bool Equals(ISubject other)
@@ -54,7 +51,5 @@ namespace Lab2
             else
                 return false;
         }
-
-
     }
 }

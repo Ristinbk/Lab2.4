@@ -9,22 +9,22 @@ namespace UnitTestProject1
     public abstract class UnitTestUnivercity
     {
         [TestClass]
-        public class TestAddEntrant
+        public class TestAddStudent
         {
             [TestMethod]
             public void AddEntrants()
             {
                 Univercity U = new Univercity("test");
-                IPerson person1 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male);
-                IPerson person2 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female);
+                IStudent student1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
+                IStudent student2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
                 int result = 2;
 
-                U.AddEntrant(person1);
-                U.AddEntrant(person2);
+                U.AddStudent(student1);
+                U.AddStudent(student2);
 
-                CollectionAssert.Contains(U.Entrants, person1);
-                CollectionAssert.Contains(U.Entrants, person2);
-                Assert.AreEqual(U.Entrants.Count, result);
+                CollectionAssert.Contains(U.Students, student1);
+                CollectionAssert.Contains(U.Students, student2);
+                Assert.AreEqual(U.Students.Count, result);
             }
         }
 
@@ -35,15 +35,15 @@ namespace UnitTestProject1
             public void AddTeachers()
             {
                 Univercity U = new Univercity("test");
-                IPerson person1 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
-                IPerson person2 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female, Title.Professor);
+                ITeacher teacher = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Lecture);
+                ITeacher teacher2 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Professor);
                 int result = 2;
 
-                U.AddTeacher(person1);
-                U.AddTeacher(person2);
+                U.AddTeacher(teacher);
+                U.AddTeacher(teacher2);
 
-                CollectionAssert.Contains(U.Teachers, person1);
-                CollectionAssert.Contains(U.Teachers, person2);
+                CollectionAssert.Contains(U.Teachers, teacher);
+                CollectionAssert.Contains(U.Teachers, teacher2);
                 Assert.AreEqual(U.Teachers.Count, result);
             }
         }
@@ -169,27 +169,27 @@ namespace UnitTestProject1
         }
 
         [TestClass]
-        public class TestMoveEntrantInGroup
+        public class TestMoveStudentInGroup
         {
             [TestMethod]
-            public void MoveEntrantInGroup()
+            public void MoveStudentInGroup()
             {
                 Univercity U = new Univercity("test");
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
-                IPerson person1 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male);
-                IPerson person2 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female);
-                string ng = group.NumberGroup.ToString();
-                string id1 = person1.Id.ToString();
-                string id2 = person2.Id.ToString();
+                IStudent student1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
+                IStudent student2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
+                string ng = group.NumberGroup.ToString();              
                 int result = 2;
 
                 U.AddGroup(group);
-                U.AddEntrant(person1);
-                U.AddEntrant(person2);
-                U.MoveEntrantInGroup(ng, id1);
-                U.MoveEntrantInGroup(ng, id2);
+                U.AddStudent(student1);
+                U.AddStudent(student2);
+                string id1 = student1.Id.ToString();
+                string id2 = student2.Id.ToString();
+                U.MoveStudentInGroup(ng, id1);
+                U.MoveStudentInGroup(ng, id2);
 
-                Assert.AreEqual(group.Persons.Count, result);
+                Assert.AreEqual(group.Students.Count, result);
             }
         }
 
@@ -202,21 +202,21 @@ namespace UnitTestProject1
                 Univercity U = new Univercity("test");
                 ISubject subject1 = new Subject("test", SubjectType.Credited);
                 ISubject subject2 = new Subject("test2", SubjectType.Exem);
-                IPerson person = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
+                ITeacher teacher = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Lecture);
                 string ns1 = subject1.NameSubject.ToString();
                 string ns2 = subject2.NameSubject.ToString();
-                string id = person.Id.ToString();
+                string id = teacher.Id.ToString();
                 int result = 2;
-                string result2 = person.Name.ToString();
+                string result2 = teacher.Name.ToString();
 
                 U.AddSubject(subject1);
                 U.AddSubject(subject2);
-                U.AddTeacher(person);
+                U.AddTeacher(teacher);
 
                 U.AddSubjectToTeacher(id, ns1);
                 U.AddSubjectToTeacher(id, ns2);
 
-                Assert.AreEqual(person.Subjects.Count, result);
+                Assert.AreEqual(teacher.Subjects.Count, result);
             }
 
             [TestMethod]
@@ -225,15 +225,15 @@ namespace UnitTestProject1
                 Univercity U = new Univercity("test");
                 ISubject subject1 = new Subject("test", SubjectType.Credited);
                 ISubject subject2 = new Subject("test2", SubjectType.Exem);
-                IPerson person = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
+                ITeacher teacher = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14),Title.Lecture);
                 string ns1 = subject1.NameSubject.ToString();
                 string ns2 = subject2.NameSubject.ToString();
-                string id = person.Id.ToString();
-                string result = person.Name.ToString();
+                string id = teacher.Id.ToString();
+                string result = teacher.Name.ToString();
 
                 U.AddSubject(subject1);
                 U.AddSubject(subject2);
-                U.AddTeacher(person);
+                U.AddTeacher(teacher);
 
                 U.AddSubjectToTeacher(id, ns1);
                 U.AddSubjectToTeacher(id, ns2);
@@ -252,25 +252,24 @@ namespace UnitTestProject1
                 Univercity U = new Univercity("test");
                 IGroup group1 = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 IGroup group2 = new Group(new NumberGroup(Specialty.StateAudit, DateTime.Now.Year));
-                IPerson person1 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male);
-                IPerson person2 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female);
+                IStudent student1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
+                IStudent student2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
                 string ng1 = group1.NumberGroup.ToString();
                 string ng2 = group2.NumberGroup.ToString();
-                string id1 = person1.Id.ToString();
-                string id2 = person2.Id.ToString();
                 int result = 1;
 
+                U.AddStudent(student1);
+                U.AddStudent(student2);
                 U.AddGroup(group1);
                 U.AddGroup(group2);
-                U.AddEntrant(person1);
-                U.AddEntrant(person2);
-                U.MoveEntrantInGroup(ng1, id1);
-                U.MoveEntrantInGroup(ng1, id2);
-                string idg = group1.Persons[0].Id.ToString();
-                U.MoveToAnotherGroup(idg, ng1, ng2);
+                string id1 = student1.Id.ToString();
+                U.MoveStudentInGroup(ng1, id1);
 
-                Assert.AreEqual(group1.Persons.Count, result);
-                Assert.AreEqual(group2.Persons.Count, result);
+                string id2 = group1.Students[0].Id.ToString();
+                U.MoveStudentToAnotherGroup(id2, ng2);
+
+                Assert.AreEqual(group1.Students.Count, result);
+                Assert.AreEqual(group2.Students.Count, result);
             }
         }
 
@@ -281,18 +280,18 @@ namespace UnitTestProject1
             public void RemoveEntrant()
             {
                 Univercity U = new Univercity("test");
-                IPerson person1 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male);
-                IPerson person2 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female);
-                string id1 = person2.Id.ToString();
+                IStudent entrant1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
+                IStudent entrant2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
+                string id1 = entrant2.Id.ToString();
                 int result = 1;
 
-                U.AddEntrant(person1);
-                U.AddEntrant(person2);
-                U.RemoveEntrant(id1);
+                U.AddStudent(entrant1);
+                U.AddStudent(entrant2);
+                U.RemoveStudent(id1);
 
-                CollectionAssert.Contains(U.Entrants, person1);
-                CollectionAssert.DoesNotContain(U.Entrants, person2);
-                Assert.AreEqual(U.Entrants.Count, result);
+                CollectionAssert.Contains(U.Students, entrant1);
+                CollectionAssert.DoesNotContain(U.Students, entrant2);
+                Assert.AreEqual(U.Students.Count, result);
             }
         }
 
@@ -303,17 +302,17 @@ namespace UnitTestProject1
             public void RemoveTeachers()
             {
                 Univercity U = new Univercity("test");
-                IPerson person1 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
-                IPerson person2 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female, Title.Professor);
-                string id2 = person2.Id.ToString();
+                ITeacher teacher1 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Lecture);
+                ITeacher teacher2 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Professor);
+                string id2 = teacher2.Id.ToString();
                 int result = 1;
 
-                U.AddTeacher(person1);
-                U.AddTeacher(person2);
+                U.AddTeacher(teacher1);
+                U.AddTeacher(teacher2);
                 U.RemoveTeacher(id2);
 
-                CollectionAssert.Contains(U.Teachers, person1);
-                CollectionAssert.DoesNotContain(U.Teachers, person2);
+                CollectionAssert.Contains(U.Teachers, teacher1);
+                CollectionAssert.DoesNotContain(U.Teachers, teacher2);
                 Assert.AreEqual(U.Teachers.Count, result);
             }
         }
@@ -382,94 +381,14 @@ namespace UnitTestProject1
                 CollectionAssert.DoesNotContain(U.Sessions, session2);
                 Assert.AreEqual(U.Sessions.Count, result);
             }
-        }
-
-        [TestClass]
-        public class TestShowPersonInGroup
-        {
-            [TestMethod]
-            public void ShowPersonInGroup()
-            {
-                Univercity U = new Univercity("test");
-                IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
-                IPerson person1 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male);
-                IPerson person2 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female);
-                string ng = group.NumberGroup.ToString();
-                string id1 = person1.Id.ToString();
-                string id2 = person2.Id.ToString();
-
-                U.AddGroup(group);
-                U.AddEntrant(person1);
-                U.AddEntrant(person2);
-                U.MoveEntrantInGroup(ng, id1);
-                U.MoveEntrantInGroup(ng, id2);
-                U.ShowPersonsInGroup(ng);
-            }
-        }
-
-        [TestClass]
-        public class TestShowResultOfSession
-        {
-            [TestMethod]
-            public void ShowResultOfSession()
-            {
-                Univercity U = new Univercity("test");
-                IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
-                IPerson person1 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male);
-                IPerson person2 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female);
-                ISession session = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
-                ISubject subject = new Subject("test", SubjectType.Credited);
-                string ng = group.NumberGroup.ToString();
-                string id1 = person1.Id.ToString();
-                string id2 = person2.Id.ToString();
-                string s = session.ToString();
-                string sn = subject.ToString();
-
-                U.AddGroup(group);
-                U.AddEntrant(person1);
-                U.AddEntrant(person2);
-                U.AddSession(session);
-                U.AddSubject(subject);
-                U.MoveEntrantInGroup(ng, id1);
-                U.MoveEntrantInGroup(ng, id2);
-                U.ShowResultOfSession(s, ng, sn);
-            }
-        }
-
-        [TestClass]
-        public class TestMoveResultSubject
-        {
-            [TestMethod]
-            public void MoveResultSubject()
-            {
-                Univercity U = new Univercity("test");
-                IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
-                IPerson person = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male);
-                ISession session = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
-                ISubject subject = new Subject("test", SubjectType.Credited);
-                string ng = group.NumberGroup.ToString();
-                string id = person.Id.ToString();
-                string s = session.ToString();
-                string sn = subject.ToString();
-                Assessment a = Assessment.Five;
-
-                U.AddGroup(group);
-                U.AddEntrant(person);
-                U.AddSession(session);
-                U.AddSubject(subject);
-                U.MoveEntrantInGroup(ng, id);
-                session.AddSubjects(group, U.Subjects);
-
-                U.MoveResultSubject(s, ng, sn, a);
-            }
-        }
+        } 
     }
 
     [TestClass]
-    public abstract class UnitTestPerson
+    public abstract class UnitTestStudent
     {
         [TestClass]
-        public class TestAddSubject
+        public class TestAddSubjects
         {
             [TestMethod]
             public void AddSubject()
@@ -477,111 +396,44 @@ namespace UnitTestProject1
                 Univercity U = new Univercity("test");
                 ISubject subject1 = new Subject("test", SubjectType.Credited);
                 ISubject subject2 = new Subject("test2", SubjectType.Exem);
-                IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
-                var ng = group.NumberGroup;
-                var id = new Id(ng, new Id());
-                IPerson person1 = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male);
-                IPerson person2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id);
-                string id1 = person1.Id.ToString();
-                string id2 = person2.Id.ToString();
-                string ns1 = subject1.NameSubject.ToString();
-                string ns2 = subject2.NameSubject.ToString();
+                IStudent student = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
 
-                U.AddGroup(group);
-                U.AddEntrant(person1);
-                group.AddPerson(person2);
-                person1.AddSubject(subject1);
-                person1.AddSubject(subject2);
-                person2.AddSubject(subject1);
+                U.AddStudent(student);
+                U.Subjects.Add(subject1);
+                U.Subjects.Add(subject1);
+                student.AddSubjects(U.Subjects);
 
-                ReferenceEquals(person1.Subjects, subject1);
-                ReferenceEquals(person1.Subjects, subject2);
-                ReferenceEquals(person2.Subjects, subject1);
+                ReferenceEquals(student.Subjects, subject1);
+                ReferenceEquals(student.Subjects, subject2);
             }
-        }
-    }
+        } 
 
-    [TestClass]
-    public abstract class UnitTestEntrant
-    {
         [TestClass]
-        public class TestAddAssessment
+        public class TestoveToSubjectAssessment
         {
             [TestMethod]
-            public void AddAssessment()
+            public void ToSubjectAssessment()
             {
                 Univercity U = new Univercity("test");
-                IPerson person = new Entrant(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male);
+                IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
+                IStudent student = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
                 ISession session = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
                 ISubject subject = new Subject("test", SubjectType.Credited);
                 string ns = subject.ToString();
                 string s = session.ToString();
+                string ng = group.NumberGroup.ToString();
+                string id = student.Id.ToString();
                 Assessment a = Assessment.Four;
-
-                U.AddEntrant(person);
+                U.AddGroup(group);
+                U.AddStudent(student);
                 U.AddSession(session);
                 U.AddSubject(subject);
-                session.AddSubjects(person, U.Subjects);
-                session.MoveToSubjectAssessment(person, subject, a);
-                var result = person.Subjects.Where(e => e.Assessment.Equals(a));
+                U.MoveStudentInGroup(ng, id);
+                session.AddSubjects(student, U.Subjects);
+                session.MoveToSubjectAssessment(student, subject, a);
+                var result = student.Subjects.Where(e => e.Assessment.Equals(a));
 
-                ReferenceEquals(person.Subjects, result);
-            }
-        }
-    }
-
-    [TestClass]
-    public abstract class UnitTestStudent
-    {
-        [TestClass]
-        public class TestAddStudents
-        {
-            [TestMethod]
-            public void AddStudents()
-            {
-                Univercity U = new Univercity("test");
-                IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
-                var ng = group.NumberGroup;
-                var id = new Id(ng, new Id());
-                IPerson person1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id);
-                IPerson person2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female, id);
-                int result = 2;
-
-                U.AddGroup(group);
-                group.AddPerson(person1);
-                group.AddPerson(person2);
-
-                CollectionAssert.Contains(group.Persons, person1);
-                CollectionAssert.Contains(group.Persons, person2);
-                Assert.AreEqual(group.Persons.Count, result);
-            }
-        }
-
-        [TestClass]
-        public class TestAddAssessment
-        {
-            [TestMethod]
-            public void AddAssessment()
-            {
-                Univercity U = new Univercity("test");
-                IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
-                var ng = group.NumberGroup;
-                var id = new Id(ng, new Id());
-                IPerson person = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id);
-                ISubject subject = new Subject("test", SubjectType.Credited);
-                ISession session = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
-                string s = session.ToString();
-                Assessment a = Assessment.Four;
-
-                U.AddGroup(group);
-                group.AddPerson(person);
-                U.AddSession(session);
-                U.AddSubject(subject);
-                session.AddSubjects(group, U.Subjects);
-                session.MoveToSubjectAssessment(person, subject, a);
-                var result = person.Subjects.Where(e => e.Assessment.Equals(a));
-
-                ReferenceEquals(person.Subjects, result);
+                ReferenceEquals(student.Subjects, result);
             }
         }
     }
@@ -596,21 +448,21 @@ namespace UnitTestProject1
             public void AddSubject()
             {
                 Univercity U = new Univercity("test");
-                IPerson person = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
+                ITeacher teacher = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Lecture);
                 Subject subject1 = new Subject("test", SubjectType.Credited);
                 ISubject subject2 = new Subject("test2", SubjectType.Exem);
                 int result = 2;
 
-                U.AddTeacher(person);
+                U.AddTeacher(teacher);
                 U.AddSubject(subject1);
                 U.AddSubject(subject2);
 
-                person.AddSubject(subject1);
-                person.AddSubject(subject2);
+                teacher.AddSubject(subject1);
+                teacher.AddSubject(subject2);
 
                 CollectionAssert.Contains(U.Subjects, subject1);
                 CollectionAssert.Contains(U.Subjects, subject2);
-                Assert.AreEqual(person.Subjects.Count, result);
+                Assert.AreEqual(teacher.Subjects.Count, result);
             }
         }
     }
@@ -619,76 +471,76 @@ namespace UnitTestProject1
     public abstract class UnitTestGroup
     {
         [TestClass]
-        public class TestAddPerson
+        public class TestAddStudent
         {
             [TestMethod]
-            public void AddPerson()
+            public void AddStudent()
             {
                 Univercity U = new Univercity("test");
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 var ng = group.NumberGroup;
                 var id = new Id(ng, new Id());
-                IPerson person1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id);
-                IPerson person2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female, id);
+                IStudent student1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id);
+                IStudent student2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id);
                 int result = 2;
 
                 U.AddGroup(group);
-                group.AddPerson(person1);
-                group.AddPerson(person2);
+                group.AddStudent(student1);
+                group.AddStudent(student2);
 
-                CollectionAssert.Contains(group.Persons, person1);
-                CollectionAssert.Contains(group.Persons, person2);
-                Assert.AreEqual(group.Persons.Count, result);
+                CollectionAssert.Contains(group.Students, student1);
+                CollectionAssert.Contains(group.Students, student2);
+                Assert.AreEqual(group.Students.Count, result);
             }
         }
 
         [TestClass]
-        public class TestRemovePerson
+        public class TestRemoveStudent
         {
             [TestMethod]
-            public void RemovePerson()
+            public void RemoveStudent()
             {
                 Univercity U = new Univercity("test");
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 var ng = group.NumberGroup;
                 var id = new Id(ng, new Id());
                 var id2 = new Id(ng, new Id());
-                IPerson person1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id);
-                IPerson person2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Female, id2);
-                string id3 = person2.Id.ToString();
+                IStudent student1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id);
+                IStudent student2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id2);
                 int result = 1;
 
                 U.AddGroup(group);
-                group.AddPerson(person1);
-                group.AddPerson(person2);
-                group.RemovePerson(id3);
+                group.AddStudent(student1);
+                group.AddStudent(student2);
+                string id3 = group.Students[1].Id.ToString();
+                group.RemoveStudent(id3.ToString());
 
-                CollectionAssert.Contains(group.Persons, person1);
-                CollectionAssert.DoesNotContain(group.Persons, person2);
-                Assert.AreEqual(group.Persons.Count, result);
+                CollectionAssert.Contains(group.Students, student1);
+                CollectionAssert.DoesNotContain(group.Students, student2);
+                Assert.AreEqual(group.Students.Count, result);
             }
         }
 
         [TestClass]
-        public class TestGetPerson
+        public class TestGetStudent
         {
             [TestMethod]
-            public void GetPerson()
+            public void GetStudent()
             {
                 Univercity U = new Univercity("test");
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 var ng = group.NumberGroup;
                 var id = new Id(ng, new Id());
-                IPerson person = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id);
-                string id1 = person.Id.ToString();
+                IStudent student = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id);
                 int result = 1;
 
                 U.AddGroup(group);
-                group.AddPerson(person);
-                var g = group.GetPerson(id1);
+                group.AddStudent(student);
+                string id1 = group.Students[0].Id.ToString();
+                var g = group.GetStudent(id1);
 
-                CollectionAssert.Contains(group.Persons, g);
-                Assert.AreEqual(group.Persons.Count, result);
+                CollectionAssert.Contains(group.Students, g);
+                Assert.AreEqual(group.Students.Count, result);
             }
         }
 
@@ -702,11 +554,11 @@ namespace UnitTestProject1
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 var ng = group.NumberGroup;
                 var id = new Id(ng, new Id());
-                IPerson person = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id);
+                IStudent student = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id);
 
                 U.AddGroup(group);
-                group.AddPerson(person);
-                var result = person.Equals(person);
+                group.AddStudent(student);
+                var result = student.Equals(student);
 
                 Assert.IsTrue(result);
             }
@@ -719,13 +571,13 @@ namespace UnitTestProject1
                 var ng = group.NumberGroup;
                 var id1 = new Id(ng, new Id());
                 var id2 = new Id(ng, new Id());
-                IPerson person1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id1);
-                IPerson person2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id2);
+                IStudent student1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id1);
+                IStudent student2 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id2);
 
                 U.AddGroup(group);
-                group.AddPerson(person1);
-                group.AddPerson(person2);
-                var result = person1.Equals(person2);
+                group.AddStudent(student1);
+                group.AddStudent(student2);
+                var result = student1.Equals(student2);
 
                 Assert.IsFalse(result);
             }
@@ -737,12 +589,12 @@ namespace UnitTestProject1
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 var ng = group.NumberGroup;
                 var id1 = new Id(ng, new Id());
-                IPerson person1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id1);
-                IPerson person2 = null;
+                IStudent student1 = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id1);
+                IStudent student2 = null;
 
                 U.AddGroup(group);
-                group.AddPerson(person1);
-                var result = person1.Equals(person2);
+                group.AddStudent(student1);
+                var result = student1.Equals(student2);
 
                 Assert.IsFalse(result);
             }
@@ -760,14 +612,14 @@ namespace UnitTestProject1
             public void AddTeacher()
             {
                 Univercity U = new Univercity("test");
-                IPerson person = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
+                ITeacher teacher = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Lecture);
                 ISubject subject = new Subject("test", SubjectType.Credited);
-                var result = person.Name;
+                var result = teacher.Name;
 
-                U.AddTeacher(person);
+                U.AddTeacher(teacher);
                 U.AddSubject(subject);
 
-                subject.AddTeacher(person);
+                subject.AddTeacher(teacher);
 
                 ReferenceEquals(subject.NameTeacher, result);
             }
@@ -780,10 +632,10 @@ namespace UnitTestProject1
             public void GetSubject()
             {
                 Univercity U = new Univercity("test");
-                IPerson person = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
+                ITeacher teacher = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Lecture);
                 ISubject subject = new Subject("test", SubjectType.Credited);
 
-                U.AddTeacher(person);
+                U.AddTeacher(teacher);
                 U.AddSubject(subject);
                 var result = subject.GetSubject(subject);
 
@@ -798,10 +650,10 @@ namespace UnitTestProject1
             public void TrueEqual()
             {
                 Univercity U = new Univercity("test");
-                IPerson person = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
+                ITeacher teacher = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Lecture);
 
-                U.AddTeacher(person);
-                var result = person.Equals(person);
+                U.AddTeacher(teacher);
+                var result = teacher.Equals(teacher);
 
                 Assert.IsTrue(result);
             }
@@ -810,12 +662,12 @@ namespace UnitTestProject1
             public void FalseEqual()
             {
                 Univercity U = new Univercity("test");
-                IPerson person1 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
-                IPerson person2 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
+                ITeacher teacher1 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Lecture);
+                ITeacher teacher2 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Lecture);
 
-                U.AddTeacher(person1);
-                U.AddTeacher(person2);
-                var result = person1.Equals(person2);
+                U.AddTeacher(teacher1);
+                U.AddTeacher(teacher2);
+                var result = teacher1.Equals(teacher2);
                 Assert.IsFalse(result);
             }
 
@@ -823,11 +675,11 @@ namespace UnitTestProject1
             public void FalseOneArgumentIsNull()
             {
                 Univercity U = new Univercity("test");
-                IPerson person1 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, Title.Lecture);
-                IPerson person2 = null;
+                ITeacher teacher1 = new Teacher(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Title.Lecture);
+                ITeacher teacher2 = null;
 
-                U.AddTeacher(person1);
-                var result = person1.Equals(person2);
+                U.AddTeacher(teacher1);
+                var result = teacher1.Equals(teacher2);
 
                 Assert.IsFalse(result);
             }
@@ -850,11 +702,11 @@ namespace UnitTestProject1
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 var ng = group.NumberGroup;
                 var id = new Id(ng, new Id());
-                IPerson person = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id);
+                IStudent student = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id);
                 int result = 2;
 
                 U.Groups.Add(group);
-                group.AddPerson(person);
+                group.AddStudent(student);
                 U.Sessions.Add(session);
                 U.Subjects.Add(subject1);
                 U.Subjects.Add(subject2);
@@ -877,15 +729,15 @@ namespace UnitTestProject1
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 var ng = group.NumberGroup;
                 var id = new Id(ng, new Id());
-                IPerson person = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id);
+                IStudent student = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id);
                 int result = 2;
 
                 U.Groups.Add(group);
-                group.AddPerson(person);
+                group.AddStudent(student);
                 U.Sessions.Add(session);
                 U.Subjects.Add(subject1);
-                U.Subjects.Add(subject2);
-                session.AddSubjects(person, U.Subjects);
+                U.Subjects.Add(subject2); 
+                session.AddSubjects(student, U.Subjects);
 
                 Assert.AreEqual(session.Subjects.Count, result);
             }
@@ -903,16 +755,18 @@ namespace UnitTestProject1
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 var ng = group.NumberGroup;
                 var id = new Id(ng, new Id());
-                IPerson person = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), Gender.Male, id);
+                IStudent student = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14), id);
                 Assessment a = Assessment.Four;
 
                 U.Groups.Add(group);
-                group.AddPerson(person);
+                group.AddStudent(student);
                 U.Sessions.Add(session);
-                U.Subjects.Add(subject);
-                session.AddSubjects(person, U.Subjects);
+                U.Subjects.Add(subject);   
+                session.AddSubjects(student, U.Subjects);
+                session.MoveToSubjectAssessment(student, subject, a);
+                var result = student.Subjects.Find(s => s.Equals(subject)).Assessment;
 
-                session.MoveToSubjectAssessment(person, subject, a);
+                ReferenceEquals(a, result);
             }
         }
 

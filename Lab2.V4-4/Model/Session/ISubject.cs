@@ -10,7 +10,7 @@ namespace Lab2
         Assessment Assessment { get; }
         string NameSubject { get; set; }
 
-        void AddTeacher(IPerson teacher);
+        void AddTeacher(ITeacher teacher);
         ISubject GetSubject(ISubject subject);
         void AddAssessment(Assessment assessment);
     }
