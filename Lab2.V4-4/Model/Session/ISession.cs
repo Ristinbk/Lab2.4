@@ -5,13 +5,14 @@ namespace Lab2
 {
     public interface ISession : IEquatable<ISession>
     {
+        List<IGroup> Groups { get; set; }
         List<ISubject> Subjects { get; }
-        SessionType SessionType { get; }
-        string Specialty { get; }           
+        SessionType SessionType { get; }           
         int Year { get; }
 
-        void AddSubjects(IGroup Group, List<ISubject> subjects);
-        void AddSubjects(IStudent student, List<ISubject> subjects);
+        void AddSubjects(List<ISubject> subjects);
+        void AddSubjectsInGroup(IGroup Group);
+        void AddSubjectsInStudent(IStudent student);
         void MoveToSubjectAssessment(IStudent student, ISubject subject, Assessment assessment);
     }
 }

@@ -14,10 +14,10 @@ namespace Lab2
             Number = Int32.Parse(number.ToString().Substring(2));
         }
 
-        public NumberGroup(NumberGroup numberGroup)
+        public NumberGroup(NumberGroup numberGroup, int number)
         {
             CodeSpecialty = numberGroup.ToString();
-            Number = 1;
+            Number = number;
         }
 
         public override string ToString() => $"{CodeSpecialty}{Number}";

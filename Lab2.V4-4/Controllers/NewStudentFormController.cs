@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Security.Cryptography.X509Certificates;
 using Lab2;
 
 namespace Lab4.Controllers
@@ -11,16 +9,10 @@ namespace Lab4.Controllers
     {
         private string _firstName;
         private string _lastName;
-        private string _patronymic;
+        private string _patronomyc;
         private int? _year;
         private int? _month;
         private int? _day;
-        private NumberGroup _numberGroup;
-
-        public IStudent Student => CanSave
-            ? new Student(new FullName(FirstName, LastName, Patronymic),
-                new DateTime(Year.Value, Month.Value, Day.Value))
-            : null;
 
         public string FirstName
         {
@@ -42,12 +34,12 @@ namespace Lab4.Controllers
             }
         }
 
-        public string Patronymic
+        public string Patronomyc
         {
-            get => _patronymic;
+            get => _patronomyc;
             set
             {
-                _patronymic = value;
+                _patronomyc = value;
                 OnPropertyChanged(nameof(CanSave));
             }
         }
@@ -82,28 +74,21 @@ namespace Lab4.Controllers
             }
         }
 
-        public NumberGroup NumberGroup
-        {
-            get => _numberGroup;
-            set
-            {
-                _numberGroup = value;
-                OnPropertyChanged(nameof(CanSave));
-            }
-        }
+        public IStudent Student => CanSave
+            ? new Student(new FullName(FirstName, LastName, Patronomyc),
+                new DateTime(Year.Value, Month.Value, Day.Value))
+            : null;
 
         public bool CanSave =>
-            !string.IsNullOrWhiteSpace(NumberGroup.ToString())
-            && !string.IsNullOrWhiteSpace(FirstName)
+             !string.IsNullOrWhiteSpace(FirstName)
             && !string.IsNullOrWhiteSpace(LastName)
-            && !string.IsNullOrWhiteSpace(Patronymic)
+            && !string.IsNullOrWhiteSpace(Patronomyc)
             && Year.HasValue
             && Month.HasValue
             && Day.HasValue;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //  [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

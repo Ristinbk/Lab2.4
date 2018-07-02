@@ -66,47 +66,51 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(92, 104);
+            this.label1.Location = new System.Drawing.Point(97, 87);
             this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 17);
             this.label1.TabIndex = 19;
             this.label1.Text = "Специальность";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // codeSpecialtyComboBox
             // 
             this.codeSpecialtyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.codeSpecialtyComboBox.FormattingEnabled = true;
-            this.codeSpecialtyComboBox.Location = new System.Drawing.Point(90, 132);
+            this.codeSpecialtyComboBox.Location = new System.Drawing.Point(88, 132);
             this.codeSpecialtyComboBox.Margin = new System.Windows.Forms.Padding(1);
             this.codeSpecialtyComboBox.Name = "codeSpecialtyComboBox";
             this.codeSpecialtyComboBox.Size = new System.Drawing.Size(182, 21);
             this.codeSpecialtyComboBox.TabIndex = 18;
-            this.codeSpecialtyComboBox.SelectedIndexChanged += new System.EventHandler(this.depTypeComboBox_SelectedIndexChanged);
+            this.codeSpecialtyComboBox.SelectedIndexChanged += new System.EventHandler(this.codeSpecialtyComboBox_SelectedIndexChanged);
             // 
             // cancelButton
             // 
             this.cancelButton.CausesValidation = false;
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.cancelButton.Location = new System.Drawing.Point(201, 242);
+            this.cancelButton.Location = new System.Drawing.Point(185, 252);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(1);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(71, 34);
             this.cancelButton.TabIndex = 10;
             this.cancelButton.Text = "Отмена";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // addButton
             // 
             this.addButton.Enabled = false;
             this.addButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.addButton.Location = new System.Drawing.Point(90, 242);
+            this.addButton.Location = new System.Drawing.Point(88, 252);
             this.addButton.Margin = new System.Windows.Forms.Padding(1);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(80, 34);
             this.addButton.TabIndex = 7;
             this.addButton.Text = "Добавить";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // errorProvider1
             // 
@@ -114,9 +118,11 @@
             // 
             // NewGroupForm
             // 
+            this.AcceptButton = this.addButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(353, 369);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

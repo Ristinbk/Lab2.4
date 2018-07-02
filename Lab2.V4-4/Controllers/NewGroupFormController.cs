@@ -2,12 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace Lab4.Controllers
 {
@@ -15,6 +11,7 @@ namespace Lab4.Controllers
     {
         private int? _number;
         private Specialty? _codeSpecialty;
+        public List<Specialty> Specialties { get; }
 
         public Specialty? CodeSpecialty
         {
@@ -22,7 +19,7 @@ namespace Lab4.Controllers
             set
             {
                 _codeSpecialty = value;
-                OnPropertyChanged(nameof(GetCanSave));
+                OnPropertyChanged(nameof(CanSave));
             }
         }
 
@@ -32,34 +29,26 @@ namespace Lab4.Controllers
             set
             {
                 _number = value;
-                OnPropertyChanged(nameof(GetCanSave));
+                OnPropertyChanged(nameof(CanSave));
             }
-
         }
-        public List<IGroup> Groups { get; }
 
-        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
-        public IGroup Group => GetCanSave()
-            ? new Group(new NumberGroup(CodeSpecialty.Value, Number.Value))
-            : null;
+        public IGroup Group => CanSave ? new Group(new NumberGroup(CodeSpecialty.Value, DateTime.Now.Year))
+       : null;
 
-        public bool GetCanSave() =>
-            !string.IsNullOrWhiteSpace(CodeSpecialty.ToString())
-            && Number.HasValue;
+        public bool CanSave => CodeSpecialty.HasValue;
 
-        public NewGroupFormController(List<IGroup> groups)
+        public NewGroupFormController(string codeSpecialty)
         {
-            Groups = new List<IGroup>();
+            Specialties = new List<Specialty>();
             foreach (var t in Enum.GetValues(typeof(Specialty)).Cast<Specialty>().ToList())
             {
-                if (groups.All(d => d.NumberGroup.CodeSpecialty != t.ToString()))
-                {
-                    Groups.Add(new Group(new NumberGroup(t, DateTime.Now.Year)));
-                }
+                Specialties.Add(t);
             }
+            _codeSpecialty = Specialties.Find(s=>s.Equals(codeSpecialty));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

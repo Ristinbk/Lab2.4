@@ -13,12 +13,14 @@ namespace Lab2
         {
             Univercity U = new Univercity("test"); 
             Demo.InitializeUnivercity(U);
-            Demo.ShowMenu(U);
+      //      Demo.ShowMenu(U);
 
-            GroupsFormController controller = new GroupsFormController(U);
+            UnivercityFormController controller = new UnivercityFormController(U);
+       //     SessionsFormController controller1 = new SessionsFormController(U);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GroupsForm(controller));
+            Application.Run(new UnivercityForm(controller));
+       //     Application.Run(new SessionForm(controller1));
         }       
     }
 }

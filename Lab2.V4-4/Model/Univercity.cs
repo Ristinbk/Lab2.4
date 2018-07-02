@@ -52,6 +52,15 @@ namespace Lab2
                 throw new ArgumentNullException();
             if (!Groups.Contains(group))
                 Groups.Add(group);
+            else
+            {
+                int a = Groups.FindAll(s => s
+                  .NumberGroup.ToString().Substring(0,5)
+                    .Equals(group.NumberGroup.ToString().Substring(0, 5)))
+                    .Count();
+                group.NumberGroup= new NumberGroup(group.NumberGroup, ++a);
+                Groups.Add(group);
+            }
         }
 
         public void AddSession(ISession session)
@@ -85,7 +94,6 @@ namespace Lab2
             var s = g1.GetStudent(id);
             g2.AddStudent(s);
             g1.RemoveStudent(id);
-       //     s.Id = new Id(g2.NumberGroup, id.Substring(5));
         }
 
         public IStudent GetStudent(string id)

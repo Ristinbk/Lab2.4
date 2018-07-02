@@ -1,61 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using Lab2;
+using Lab4.View;
 
-namespace Lab2.Controllers
+namespace Lab4.Controllers
 {
-    class NewSessionFormController : INotifyPropertyChanged
+    public class NewSessionFormController : INotifyPropertyChanged
     {
-        private int? _number;
-        private Specialty? _codeSpecialty;
+        private int? _year;
+        private SessionType? _sessionType;
+        public List<ISession> Sessions { get; }
 
-        public Specialty? CodeSpecialty
+        public SessionType? SessionType
         {
-            get => _codeSpecialty;
+            get => _sessionType;
             set
             {
-                _codeSpecialty = value;
-                OnPropertyChanged(nameof(GetCanSave));
+                _sessionType = value;
+                OnPropertyChanged(nameof(CanSave));
+            }
+        }
+        
+        public int? Year
+        {
+            get => _year;
+            set
+            {
+                _year = value;
+                OnPropertyChanged(nameof(CanSave));
             }
         }
 
-        public int? Number
-        {
-            get => _number;
-            set
-            {
-                _number = value;
-                OnPropertyChanged(nameof(GetCanSave));
-            }
-
-        }
-        public List<IGroup> Groups { get; }
-
-        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
-        public IGroup Group => GetCanSave()
-            ? new Group(new NumberGroup(CodeSpecialty.Value, Number.Value))
+        public ISession Session => CanSave
+            ? new Session(SessionType.Value, Year.Value)
             : null;
 
-        public bool GetCanSave() =>
-            !string.IsNullOrWhiteSpace(CodeSpecialty.ToString())
-            && Number.HasValue;
-
-        public NewSessionFormController(List<IGroup> groups)
-        {
-            Groups = new List<IGroup>();
-            foreach (var t in Enum.GetValues(typeof(Specialty)).Cast<Specialty>().ToList())
-            {
-                if (groups.All(d => d.NumberGroup.CodeSpecialty != t.ToString()))
-                {
-                    Groups.Add(new Group(new NumberGroup(t, DateTime.Now.Year)));
-                }
-            }
-        }
+        public bool CanSave =>
+            !string.IsNullOrWhiteSpace(SessionType.ToString())
+            && Year.HasValue;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

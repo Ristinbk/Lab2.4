@@ -51,9 +51,11 @@
   <ItemGroup>
     <Compile Include="Controllers\NewSessionFormController.cs" />
     <Compile Include="Controllers\NewStudentFormController.cs" />
+    <Compile Include="Controllers\NewSubjectFormController.cs" />
     <Compile Include="Controllers\NewTeacherFormController.cs" />
     <Compile Include="Controllers\NewGroupFormController.cs" />
     <Compile Include="Controllers\GroupsFormController.cs" />
+    <Compile Include="Controllers\TeachersFormController.cs" />
     <Compile Include="Model\Person\Id.cs" />
     <Compile Include="Model\Group\Specialty.cs" />
     <Compile Include="Model\Demo.cs" />
@@ -84,23 +86,49 @@
     <Compile Include="View\NewGroupForm.Designer.cs">
       <DependentUpon>NewGroupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\NewSessionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\NewSessionForm.Designer.cs">
+      <DependentUpon>NewSessionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\NewStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\NewStudentForm.Designer.cs">
       <DependentUpon>NewStudentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SessionFrom.cs">
+    <Compile Include="Controllers\SessionsFormController.cs" />
+    <Compile Include="View\NewSubjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\SessionFrom.Designer.cs">
-      <DependentUpon>SessionFrom.cs</DependentUpon>
+    <Compile Include="View\NewSubjectForm.Designer.cs">
+      <DependentUpon>NewSubjectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SessionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SessionForm.Designer.cs">
+      <DependentUpon>SessionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\GroupsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\GroupsForm.Designer.cs">
       <DependentUpon>GroupsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\UnivercityFormController.cs" />
+    <Compile Include="View\TeachersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TeachersForm.Designer.cs">
+      <DependentUpon>TeachersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UnivercityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UnivercityForm.Designer.cs">
+      <DependentUpon>UnivercityForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -112,14 +140,26 @@
     <EmbeddedResource Include="View\NewGroupForm.resx">
       <DependentUpon>NewGroupForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\NewSessionForm.resx">
+      <DependentUpon>NewSessionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\NewStudentForm.resx">
       <DependentUpon>NewStudentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SessionFrom.resx">
-      <DependentUpon>SessionFrom.cs</DependentUpon>
+    <EmbeddedResource Include="View\NewSubjectForm.resx">
+      <DependentUpon>NewSubjectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SessionForm.resx">
+      <DependentUpon>SessionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\GroupsForm.resx">
       <DependentUpon>GroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TeachersForm.resx">
+      <DependentUpon>TeachersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UnivercityForm.resx">
+      <DependentUpon>UnivercityForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

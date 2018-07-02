@@ -30,6 +30,7 @@ namespace Lab2
             if (teacher == null)
                 throw new ArgumentNullException(nameof(teacher));
             NameTeacher = teacher.Name.ToString() ?? throw new ArgumentException("invalid teacher");
+            teacher.AddSubject(this);
         }
 
         public ISubject GetSubject(ISubject subject)
@@ -39,10 +40,7 @@ namespace Lab2
             return subject;
         }
 
-
         public void AddAssessment(Assessment assessment) => Assessment = assessment;
-
-        public override string ToString() => $"{NameSubject}";
 
         public bool Equals(ISubject other)
         {
@@ -51,5 +49,7 @@ namespace Lab2
             else
                 return false;
         }
+
+        public override string ToString() => $"{NameSubject}";
     }
 }

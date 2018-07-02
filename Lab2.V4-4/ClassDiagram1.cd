@@ -56,7 +56,7 @@
   <Class Name="Lab2.Session">
     <Position X="10.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAgBAAAAAAEgCAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAgBAAAAAAEgiAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
       <FileName>Model\Session\Session.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -93,7 +93,7 @@
   <Interface Name="Lab2.ISession">
     <Position X="8.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAgBAAAAAAAACAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAgBAAAAAAAAiAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
       <FileName>Model\Session\ISession.cs</FileName>
     </TypeIdentifier>
   </Interface>

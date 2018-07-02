@@ -136,8 +136,8 @@ namespace UnitTestProject1
             public void AddSessions()
             {
                 Univercity U = new Univercity("test");
-                ISession session1 = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
-                ISession session2 = new Session(SessionType.Summer, DateTime.Now.Year, Specialty.StateAudit);
+                ISession session1 = new Session(SessionType.Winter, DateTime.Now.Year);
+                ISession session2 = new Session(SessionType.Summer, DateTime.Now.Year);
                 int result = 2;
 
                 U.AddSession(session1);
@@ -152,9 +152,9 @@ namespace UnitTestProject1
             public void NotAddSessions()
             {
                 Univercity U = new Univercity("test");
-                ISession session1 = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
-                ISession session2 = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
-                ISession session3 = new Session(SessionType.Summer, DateTime.Now.Year, Specialty.Service);
+                ISession session1 = new Session(SessionType.Winter, DateTime.Now.Year);
+                ISession session2 = new Session(SessionType.Winter, DateTime.Now.Year);
+                ISession session3 = new Session(SessionType.Summer, DateTime.Now.Year);
                 int result = 2;
 
                 U.AddSession(session1);
@@ -368,8 +368,8 @@ namespace UnitTestProject1
             public void RemoveSessions()
             {
                 Univercity U = new Univercity("test");
-                ISession session1 = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
-                ISession session2 = new Session(SessionType.Summer, DateTime.Now.Year, Specialty.StateAudit);
+                ISession session1 = new Session(SessionType.Winter, DateTime.Now.Year);
+                ISession session2 = new Session(SessionType.Summer, DateTime.Now.Year);
                 string s2 = session2.ToString();
                 int result = 1;
 
@@ -417,7 +417,7 @@ namespace UnitTestProject1
                 Univercity U = new Univercity("test");
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 IStudent student = new Student(new FullName("test", "test", "test"), new DateTime(2000, 12, 14));
-                ISession session = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
+                ISession session = new Session(SessionType.Winter, DateTime.Now.Year);
                 ISubject subject = new Subject("test", SubjectType.Credited);
                 string ns = subject.ToString();
                 string s = session.ToString();
@@ -429,7 +429,7 @@ namespace UnitTestProject1
                 U.AddSession(session);
                 U.AddSubject(subject);
                 U.MoveStudentInGroup(ng, id);
-                session.AddSubjects(student, U.Subjects);
+           //     session.AddSubjects(student, U.Subjects);
                 session.MoveToSubjectAssessment(student, subject, a);
                 var result = student.Subjects.Where(e => e.Assessment.Equals(a));
 
@@ -696,7 +696,7 @@ namespace UnitTestProject1
             public void AddSubjects()
             {
                 Univercity U = new Univercity("test");
-                ISession session = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
+                ISession session = new Session(SessionType.Winter, DateTime.Now.Year);
                 ISubject subject1 = new Subject("test", SubjectType.Credited);
                 ISubject subject2 = new Subject("test2", SubjectType.Credited);
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
@@ -710,7 +710,7 @@ namespace UnitTestProject1
                 U.Sessions.Add(session);
                 U.Subjects.Add(subject1);
                 U.Subjects.Add(subject2);
-                session.AddSubjects(group, U.Subjects);
+        //        session.AddSubjects(group, U.Subjects);
 
                 Assert.AreEqual(session.Subjects.Count, result);
             }
@@ -723,7 +723,7 @@ namespace UnitTestProject1
             public void AddSubject()
             {
                 Univercity U = new Univercity("test");
-                ISession session = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
+                ISession session = new Session(SessionType.Winter, DateTime.Now.Year);
                 ISubject subject1 = new Subject("test", SubjectType.Credited);
                 ISubject subject2 = new Subject("test2", SubjectType.Credited);
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
@@ -737,7 +737,7 @@ namespace UnitTestProject1
                 U.Sessions.Add(session);
                 U.Subjects.Add(subject1);
                 U.Subjects.Add(subject2); 
-                session.AddSubjects(student, U.Subjects);
+          //      session.AddSubjects(student, U.Subjects);
 
                 Assert.AreEqual(session.Subjects.Count, result);
             }
@@ -750,7 +750,7 @@ namespace UnitTestProject1
             public void MoveToGroupSession()
             {
                 Univercity U = new Univercity("test");
-                ISession session = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
+                ISession session = new Session(SessionType.Winter, DateTime.Now.Year);
                 ISubject subject = new Subject("test", SubjectType.Credited);
                 IGroup group = new Group(new NumberGroup(Specialty.Service, DateTime.Now.Year));
                 var ng = group.NumberGroup;
@@ -762,7 +762,7 @@ namespace UnitTestProject1
                 group.AddStudent(student);
                 U.Sessions.Add(session);
                 U.Subjects.Add(subject);   
-                session.AddSubjects(student, U.Subjects);
+        //        session.AddSubjects(student, U.Subjects);
                 session.MoveToSubjectAssessment(student, subject, a);
                 var result = student.Subjects.Find(s => s.Equals(subject)).Assessment;
 
@@ -777,7 +777,7 @@ namespace UnitTestProject1
             public void TrueEqual()
             {
                 Univercity U = new Univercity("test");
-                ISession session = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
+                ISession session = new Session(SessionType.Winter, DateTime.Now.Year);
                 ISubject subject = new Subject("test", SubjectType.Credited);
 
                 U.Sessions.Add(session);
@@ -790,8 +790,8 @@ namespace UnitTestProject1
             public void FalseEqual()
             {
                 Univercity U = new Univercity("test");
-                ISession session1 = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
-                ISession session2 = new Session(SessionType.Summer, DateTime.Now.Year, Specialty.Service);
+                ISession session1 = new Session(SessionType.Winter, DateTime.Now.Year);
+                ISession session2 = new Session(SessionType.Summer, DateTime.Now.Year);
                 ISubject subject = new Subject("test", SubjectType.Credited);
 
                 U.Sessions.Add(session1);
@@ -805,7 +805,7 @@ namespace UnitTestProject1
             public void FalseOneArgumentIsNull()
             {
                 Univercity U = new Univercity("test");
-                ISession session1 = new Session(SessionType.Winter, DateTime.Now.Year, Specialty.Service);
+                ISession session1 = new Session(SessionType.Winter, DateTime.Now.Year);
                 ISession session2 = null;
 
                 U.Sessions.Add(session1);

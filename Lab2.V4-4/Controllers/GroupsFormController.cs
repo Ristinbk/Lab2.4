@@ -6,40 +6,32 @@ namespace Lab4.Controllers
 {
     public class GroupsFormController
     {
-        private Univercity _univercity;
+        public Univercity Univercity { get; private set; }
 
-        public List<IGroup> Groups =>_univercity?.Groups?? new List<IGroup>();
-        public IGroup SelectedUnivercity { get; set; }
-        public IGroup SelectedGroup { get; set; }
+        public List<IGroup> Groups =>Univercity?.Groups?? new List<IGroup>();
+        public IGroup SelectedGroup { get; set; }        
         public List<IStudent> Students => SelectedGroup?.Students??new List<IStudent>();
-        public string OrgInfo => IsSet ? $"{ _univercity }" : " ";
 
-        public bool CanAddGroup => SelectedUnivercity != null;
+        public bool CanAddGroup => Univercity != null;
         public bool CanAddStudent => SelectedGroup != null;
-        private bool IsSet => _univercity != null;
+
+        public string CodeSpecilty => SelectedGroup.NumberGroup.CodeSpecialty;
 
         public GroupsFormController(Univercity U)
         {
-           _univercity = U;
+            Univercity = U;
         }
 
-        public void InitializeUnivercity()
+        public void AddGroup(IGroup group)
         {
-            var univercity = new Univercity("test");
-            Demo.InitializeUnivercity(univercity);
-            _univercity = univercity;
+            Univercity.AddGroup(group);
         }
 
         public void AddStudent(IStudent student)
         {
             SelectedGroup.AddStudent(student);
         }
-
-        public void AddGroup(IGroup group)
-        {
-            _univercity.AddGroup(group);
-        }
-
+        
         public void SelectGroup(string numberGroup)
         {
             SelectedGroup = Groups.Find(d => d.NumberGroup.ToString().Equals(numberGroup));
@@ -47,7 +39,7 @@ namespace Lab4.Controllers
 
         public void RemoveGroup(string numberGroup)
         {
-            _univercity.RemoveGroup(numberGroup);
+            Univercity.RemoveGroup(numberGroup);
         }
 
         public void RemoveStudent(string id)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Lab2
@@ -36,79 +37,93 @@ namespace Lab2
 
         public static void InitializeUnivercity(Univercity U)
         {
-            U.AddGroup(new Group(new NumberGroup(Specialty.TechnosphericSafety, 2018)));
+            Random Rand = new Random();
             U.AddGroup(new Group(new NumberGroup(Specialty.Informatics, 2018)));
-            U.AddGroup(new Group(new NumberGroup(Specialty.Tourism, 2018)));
             U.AddGroup(new Group(new NumberGroup(Specialty.StateAudit, 2018)));
 
             U.Students.Add(new Student(new FullName("Илья", "Иванов", "Андреевич"), GetRandDate()));
             U.Students.Add(new Student(new FullName("Петр", "Борисов", "Петрович"), GetRandDate()));
 
-            foreach (var g in U.Groups)
-            {
-                g.AddStudent(new Student(new FullName("Илья", "Иванов", "Андреевич"), GetRandDate()));
-                g.AddStudent(new Student(new FullName("Иван", "Петров", "Олегович"), GetRandDate()));
-                g.AddStudent(new Student(new FullName("Петр", "Борисов", "Петрович"), GetRandDate()));
-                g.AddStudent(new Student(new FullName("Ольга", "Зинко", "Евгеньевна"), GetRandDate()));
-                g.AddStudent(new Student(new FullName("Мария", "Иванова", "Олеговна"), GetRandDate()));
-            }
+            U.Groups[0].AddStudent(new Student(new FullName("Илья", "Иванов", "Андреевич"), GetRandDate()));
+            U.Groups[0].AddStudent(new Student(new FullName("Иван", "Петров", "Олегович"), GetRandDate()));
+            U.Groups[0].AddStudent(new Student(new FullName("Мария", "Иванова", "Олеговна"), GetRandDate()));
+            U.Groups[1].AddStudent(new Student(new FullName("Ольга", "Зинко", "Евгеньевна"), GetRandDate()));
+            U.Groups[1].AddStudent(new Student(new FullName("Петр", "Борисов", "Петрович"), GetRandDate()));
+
 
             U.AddTeacher(new Teacher(new FullName("Илья", "Смирнов", "Олегович"), GetRandDate(), Title.Aspirant));
             U.AddTeacher(new Teacher(new FullName("Борис", "Петров", "Дмитриевич"), GetRandDate(), Title.Lecture));
             U.AddTeacher(new Teacher(new FullName("Мария", "Иванова", "Олеговна"), GetRandDate(), Title.Lecture));
 
-            U.AddSubject(new Subject("Математика", SubjectType.Exem));
-            U.AddSubject(new Subject("Физика", SubjectType.Exem));
-            U.AddSubject(new Subject("Информатика", SubjectType.Credited));
-            U.AddSubject(new Subject("Психология", SubjectType.Credited));
+            List<ISubject> winterSession = new List<ISubject>()
+            {
+                new Subject("Математика", SubjectType.Exem),
+                new Subject("Физика", SubjectType.Exem),
+                new Subject("Информатика", SubjectType.Credited),
+                new Subject("Психология", SubjectType.Credited)
+            };
+            List<ISubject> summerSession = new List<ISubject>()
+            {  
+                new Subject("Английский", SubjectType.Credited),
+                new Subject("История", SubjectType.Credited)
+            };
+            U.Subjects.AddRange(winterSession);
+            U.Subjects.AddRange(summerSession);
 
-            U.AddSession(new Session(SessionType.Winter, 2018, Specialty.Service));
+            foreach (var t in U.Subjects)
+            {
+                t.AddTeacher(GetRandTeacher());
+            }
+
+            U.AddSession(new Session(SessionType.Winter, 2018));
+            U.AddSession(new Session(SessionType.Summer, 2018));
+            U.Sessions[0].AddSubjects(U.Subjects);
+            U.Sessions[1].AddSubjects(summerSession);
+
             foreach (var session in U.Sessions)
             {
                 foreach (var group in U.Groups)
                 {
-                    session.AddSubjects(group, U.Subjects);
+
+                    session.AddSubjectsInGroup(group);
                 }
             }
 
-            foreach (var session in U.Sessions)
+            U.Sessions[0].Groups[0].Students.ForEach(delegate (IStudent student)
             {
-                foreach (var g in U.Groups)
+                student.Subjects.ForEach(delegate (ISubject subject)
                 {
-                    foreach (var student in g.Students)
-                    {
-                        foreach (var subject in student.Subjects)
-                        {
-                            session.MoveToSubjectAssessment(student, subject, GetRandAssessment());
+                    subject.AddAssessment(GetRandAssessment());
+                });
+            });
 
-                        }
-                    }
-                }
-            }
+            U.Sessions[0].Groups[1].Students.ForEach(delegate (IStudent student)
+            {
+                student.Subjects.ForEach(delegate (ISubject subject)
+                {
+                    subject.AddAssessment(GetRandAssessment());
+                });
+            });
 
             foreach (var subject in U.Subjects)
             {
-                subject.AddTeacher(GetRandTeacher(U));
+                subject.AddTeacher(GetRandTeacher());
             }
-        }
 
-        public static Assessment GetRandAssessment()
-        {
-            Random Rand = new Random();    
-            return (Assessment)Rand.Next(Enum.GetNames(typeof(Assessment)).Length);
-        }
+            DateTime GetRandDate()
+            {
+                return new DateTime(Rand.Next(1800, 1890), Rand.Next(1, 13), Rand.Next(1, 29));
+            }
 
-        public static ITeacher GetRandTeacher(Univercity U)
-        {
-            Random Rand = new Random();
-            return U.Teachers[Rand.Next(U.Teachers.Count)];
-        }
+            ITeacher GetRandTeacher()
+            { 
+                return U.Teachers[Rand.Next(U.Teachers.Count)];
+            }
 
-        public static DateTime GetRandDate()
-        {
-            Random Rand = new Random();
-            DateTime randDate = new DateTime(Rand.Next(1800, 1890), Rand.Next(1, 13), Rand.Next(1, 29));
-            return randDate;
+            Assessment GetRandAssessment()
+            {
+                return (Assessment)Rand.Next(Enum.GetNames(typeof(Assessment)).Length);
+            }
         }
 
         private static int GetNowYear()
@@ -465,7 +480,7 @@ namespace Lab2
                 switch (s)
                 {
                     case 1:
-                        U.AddSession(new Session(InputSessionType(), DateTime.Now.Year, InputSpecialty()));
+                        U.AddSession(new Session(InputSessionType(), DateTime.Now.Year));
                         break;
                     case 2:
                         U.RemoveSession(InputSession());

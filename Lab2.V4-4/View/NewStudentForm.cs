@@ -27,20 +27,7 @@ namespace Lab4.View
             if (e.PropertyName == nameof(_controller.CanSave))
                 addButton.Enabled = _controller.CanSave;
         }
-
-        private void addButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DialogResult = DialogResult.OK;
-                Close();
-            }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("Fill in all fields");
-            }
-        }
-
+       
         private void cancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -51,7 +38,7 @@ namespace Lab4.View
             if (!ValidateString(firstNameTextBox.Text))
             {
                 e.Cancel = true;
-                errorProvider1.SetError(firstNameTextBox, "Invalid name");
+                errorProvider.SetError(firstNameTextBox, "Invalid name");
             }
         }
 
@@ -60,7 +47,16 @@ namespace Lab4.View
             if (!ValidateString(lastNameTextBox.Text))
             {
                 e.Cancel = true;
-                errorProvider1.SetError(lastNameTextBox, "Invalid name");
+                errorProvider.SetError(lastNameTextBox, "Invalid name");
+            }
+        }
+
+        private void patronomycTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            if (!ValidateString(patronomycTextBox.Text))
+            {
+                e.Cancel = true;
+                errorProvider.SetError(patronomycTextBox, "Invalid name");
             }
         }
 
@@ -71,15 +67,21 @@ namespace Lab4.View
 
         private void firstNameTextBox_Validated(object sender, EventArgs e)
         {
-            errorProvider1.SetError(firstNameTextBox, "");
+            errorProvider.SetError(firstNameTextBox, "");
             _controller.FirstName = firstNameTextBox.Text;
         }
 
         private void lastNameTextBox_Validated(object sender, EventArgs e)
         {
-            errorProvider1.SetError(lastNameTextBox, "");
+            errorProvider.SetError(lastNameTextBox, "");
             _controller.LastName = lastNameTextBox.Text;
-        } 
+        }
+
+        private void patronomycTextBox_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(patronomycTextBox, "");
+            _controller.Patronomyc = patronomycTextBox.Text;
+        }
 
         private void yearComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -96,23 +98,17 @@ namespace Lab4.View
             _controller.Day = dayComboBox.SelectedItem as int?;
         }
 
-        private void lastNameTextBox_TextChanged(object sender, EventArgs e)
+        private void addButton_Click(object sender, EventArgs e)
         {
-            errorProvider1.SetError(lastNameTextBox, "");
-            _controller.LastName = lastNameTextBox.Text;
-        }
-
-        private void firstNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(firstNameTextBox, "");
-            _controller.FirstName = firstNameTextBox.Text;
-
-        }
-
-        private void patronomycTextChanged(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(patronomycTextBox, "");
-            _controller.FirstName = patronomycTextBox.Text;
+            try
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Fill in all fields");
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Lab2;
 
-namespace Lab2.Controllers
+namespace Lab4.Controllers
 {
     public class NewTeacherFormController : INotifyPropertyChanged
     {
@@ -100,12 +100,10 @@ namespace Lab2.Controllers
             && !string.IsNullOrWhiteSpace(Patronymic)
             && Year.HasValue
             && Month.HasValue
-            && Day.HasValue;
-       ///     && Title;
+            && Day.HasValue;  
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //  [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

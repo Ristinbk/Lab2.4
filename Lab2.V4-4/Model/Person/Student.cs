@@ -15,7 +15,7 @@ namespace Lab2
         public Student(FullName name, DateTime birthday, Id id) : base(name, birthday)
         {
             Id = id;
-            NumberGroup = id.ToString().Substring(0, 5);
+            NumberGroup = Id.ToString().Substring(0, 5);
         }
 
         public void AddSubjects(List<ISubject> subjects)
@@ -34,8 +34,6 @@ namespace Lab2
                 throw new ArgumentNullException(nameof(subject));
             Subjects.Find(e => e == subject).AddAssessment(assessment);
         }
-
-
 
         public override string ToString() => $"id: {Id} {Name} ({DateBirthday:d})";
     }
